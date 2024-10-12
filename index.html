@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+        .network {
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+        }
+        .layer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .layer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .node {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 0;
+            background-color: #fff;
+        }
+        .layer-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .controls input, .controls button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="network" id="network">
+        <svg id="svg" width="100%" height="600px" style="position:absolute; top:0; left:0; z-index: -1;"></svg>
+        <!-- Layers and nodes will be added here dynamically -->
+    </div>
+
+    <div id="weightsTable"></div>
+
+    <div class="controls">
+        <label for="input1">Input 1:</label>
+        <input type="number" id="input1" placeholder="Input 1" value = "1" />
+    
+        <label for="input2">Input 2:</label>
+        <input type="number" id="input2" placeholder="Input 2" value = "2" />
+    
+        <label for="learningRate">Learning Rate:</label>
+        <input type="number" id="learningRate" placeholder="Learning Rate" step="0.01" value="0.1" />
+    
+        <label for="targetValues">Target Values:</label>
+        <input type="text" id="targetValues" placeholder="Enter target value" |step="0.01" value="1.0"/>
+    
+        <button id ='forward' onclick="forwardPropagation()">Run Forward Propagation</button>
+        <button id='backward' disabled=true onclick="backwardPropagation()">Run Backpropagation</button>
+
+
+        <button id="goodInit">Good Initialization</button>
+        <button id="badInit">Bad Initialization</button>
+        <script>
+
+        document.getElementById('goodInit').addEventListener('click', function() {
+            setWeights(goodWeights);
+        });
+
+        document.getElementById('badInit').addEventListener('click', function() {
+            setWeights(badWeights);
+        });
+
+        </script>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
